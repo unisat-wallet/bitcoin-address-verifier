@@ -1,7 +1,6 @@
 # Bitcoin Address Verifier
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/unisat-wallet/bitcoin-address-verifier/actions/workflows/ci.yml/badge.svg)](https://github.com/unisat-wallet/bitcoin-address-verifier/actions)
 
 A modular system for validating and generating Bitcoin contract addresses with plugin support.
 
