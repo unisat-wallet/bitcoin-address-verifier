@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2015",
+      "noImplicitAny": false,
+      "outDir": "./lib",
+      "esModuleInterop": true,
+      "sourceMap": true,
+      "declaration": true,
+      "resolveJsonModule": true,
+    },
+    "include": ["src/**/*","src/**/*.auto.ts"]
+  }
+  

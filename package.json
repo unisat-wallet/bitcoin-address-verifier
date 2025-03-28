@@ -1,0 +1,35 @@
+{
+  "name": "@unisat/bitcoin-address-verifier",
+  "description": "A Bitcoin address verifier plugin for the BTC Staking platform.",
+  "author": "cybersinsloth",
+  "version": "0.1.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "gen:imports": "node scripts/generate-imports.js",
+    "new:plugin": "node scripts/new-plugin.js",
+    "test": "jest --config jest.config.js",
+    "test:watch": "jest --watch",
+    "build": "npm run gen:imports && tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.2.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.10",
+    "chai": "^5.2.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@babylonlabs-io/btc-staking-ts": "^0.3.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ]
+}

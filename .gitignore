@@ -1,0 +1,11 @@
+node_modules
+.vscode/*
+dist/
+.DS_Store
+es 
+*.log
+
+
+# Ignore locally generated files EXCEPT the committed ones
+src/generated/*
+!src/generated/plugins.auto.ts
