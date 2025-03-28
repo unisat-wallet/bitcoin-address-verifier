@@ -2,8 +2,10 @@
   "name": "@unisat/bitcoin-address-verifier",
   "description": "A Bitcoin address verifier plugin for the BTC Staking platform.",
   "author": "cybersinsloth",
-  "version": "0.1.1",
-  "main": "index.js",
+  "version": "0.1.2",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "gen:imports": "node scripts/generate-imports.js",
