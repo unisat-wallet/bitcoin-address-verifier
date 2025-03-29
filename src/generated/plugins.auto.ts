@@ -1,4 +1,4 @@
-// Auto-generated at 2025-03-28T11:09:57.130Z
+// Auto-generated at 2025-03-29T09:10:19.995Z
 // DO NOT EDIT DIRECTLY
 
 import BabylonStaking from '../plugins/babylon/staking';

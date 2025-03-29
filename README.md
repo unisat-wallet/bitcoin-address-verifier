@@ -23,9 +23,9 @@ yarn add @unisat/bitcoin-address-verifier
 ### Basic Usage
 
 ```
-import { generateContract } from "./index";
+import { verifyContract } from "./index";
 
-const result = generateContract("babylon:staking", {
+const result = verifyContract("babylon:staking", {
   stakerPk: "5092...",
   covenantPks: ["5092...",],
   finalityProviders: ["5092...",],
@@ -33,6 +33,9 @@ const result = generateContract("babylon:staking", {
   minUnbondingTime: 101,
   stakingDuration: 144,
   magicBytes: "62627434",
+},{
+  address: "",
+  publicKey: ""
 });
 
 console.log(result);
@@ -70,8 +73,7 @@ plugins/
 └── your-project/
     └── contract-name/
         ├── index.ts      # Main implementation
-        ├── validator.ts  # Parameter validation
-        └── test.ts       # Test cases
+        └── plugin.test.ts       # Test cases
 ```
 
 ### Example Plugin
@@ -82,7 +84,7 @@ export default {
   id: 'example:timelock',
   version: '1.0.0',
 
-  generate(params) {
+  verify(params, account) {
     // Implementation here
   },
 

@@ -1,4 +1,4 @@
-import { ContractPlugin } from "../../../core-sdk/types";
+import { ContractPlugin, WalletAccount } from "../../../core-sdk/types";
 import * as bitcoin from "bitcoinjs-lib";
 
 const brc20_module_descs = {
@@ -10,15 +10,17 @@ export default {
   name: "BRC20 Module",
   description: "BRC20 Module",
 
-  generate(params: { moduleId: string }) {
+  verify(params: { moduleId: string }, account: WalletAccount) {
     if (!params.moduleId) {
       throw new Error("Missing moduleId");
     }
     const description = brc20_module_descs[params.moduleId];
+
     return {
       address: "",
       script: getModuleIdScript(params.moduleId),
       description,
+      isOwned: false,
     };
   },
 } as ContractPlugin;

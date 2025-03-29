@@ -5,10 +5,11 @@ const registry = new PluginRegistry();
 
 registerAllPlugins(registry);
 
-export function generateContract(
-  id: string,
-  params: any
+export function verifyContract(
+  contractId: string,
+  contractParams: any,
+  walletAccount:any
 ) {
-  return registry.generateContract(id, params);
+  return registry.verifyContract(contractId, contractParams, walletAccount);
 }
 

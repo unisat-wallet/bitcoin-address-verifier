@@ -1,4 +1,4 @@
-import { ContractPlugin } from "./types";
+import { ContractPlugin, WalletAccount } from "./types";
 export class PluginRegistry {
   private plugins = new Map<string, ContractPlugin>();
 
@@ -9,33 +9,30 @@ export class PluginRegistry {
     this.plugins.set(plugin.id, plugin);
   }
 
-  generateContract(id: string, params: any) {
-    let valid = false;
+  verifyContract(id: string, params: any, account: WalletAccount) {
     let data = null;
-    let error = null;
     try {
       const plugin = this.plugins.get(id);
       if (!plugin) {
         throw new Error(`Plugin ${id} not found`);
       }
-      const { address, script } = plugin.generate(params);
+      const { address, script, isOwned, description } = plugin.verify(
+        params,
+        account
+      );
       data = {
         id: plugin.id,
         name: plugin.name,
-        description: plugin.description,
+        description: description || plugin.description,
         address,
         script,
+        isOwned,
       };
     } catch (e) {
-      error = e;
+      console.error(e);
+      // throw new Error(`Error verifying contract: ${e.message}`);
     }
-    if (data) {
-      valid = true;
-    }
-    return {
-      valid,
-      data,
-      error,
-    };
+
+    return data;
   }
 }

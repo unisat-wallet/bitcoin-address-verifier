@@ -77,13 +77,13 @@ function basicTemplate(dir, contractId) {
   fs.writeFileSync(
     path.join(dir, "index.ts"),
     `
-import { ContractPlugin } from "../../../core-sdk/types";
+import { ContractPlugin, WalletAccount } from "../../../core-sdk/types";
 export default {
   id: "${contractId}",
   name: "Your Plugin Name",
   description: "Your Plugin Description",
 
-  generate(params: any) {
+  verify(params: any, account: WalletAccount) {
     // Implement your contract address generation logic here
     throw new Error("Not implemented");
   },
@@ -99,14 +99,17 @@ import plugin from "./index";
 
 describe("${contractId}", () => {
   test("should generate valid address", () => {
+    const account = {
+      // Mock account object
+    };
     const params = {
       // Add required parameters here
     };
-    expect(() => plugin.generate(params)).not.toThrow();
+    expect(() => plugin.verify(params, account)).not.toThrow();
   });
 
   test("should throw with invalid params", () => {
-    expect(() => plugin.generate({})).toThrow();
+    expect(() => plugin.verify({}, {} as any)).toThrow();
   });
 });
 `
