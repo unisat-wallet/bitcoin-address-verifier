@@ -1,4 +1,4 @@
-import { ContractPlugin, WalletAccount } from "./types";
+import { ContractPlugin, ContractNetwork, WalletAccount } from "./types";
 export class PluginRegistry {
   private plugins = new Map<string, ContractPlugin>();
 

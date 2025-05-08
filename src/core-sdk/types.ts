@@ -1,7 +1,14 @@
+export enum ContractNetwork {
+  MAINNET = "mainnet",
+  TESTNET = "testnet",
+  REGTEST = "regtest",
+}
+
 export interface ContractPlugin {
   id: string; // Plugin ID
   name: string; // Plugin name
   description: string; // Plugin description
+
   verify: (
     params: any,
     account: WalletAccount

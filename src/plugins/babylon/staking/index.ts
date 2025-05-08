@@ -1,4 +1,9 @@
-import { ContractPlugin, WalletAccount } from "../../../core-sdk/types";
+import {
+  ContractPlugin,
+  ContractNetwork,
+  WalletAccount,
+} from "../../../core-sdk/types";
+import { getAddressNetwork } from "../../../core-sdk/utils";
 import { getStakingContract } from "./staking-contract";
 
 const toXOnly = (pubKey) =>
@@ -16,7 +21,16 @@ export default {
     ) {
       isOwned = true;
     }
-    const result = getStakingContract(params);
+
+    const network = getAddressNetwork(account.address);
+    if (!network.valid) {
+      throw new Error("Invalid account address");
+    }
+
+    const result = getStakingContract(
+      params,
+      network.network as ContractNetwork
+    );
 
     return {
       isOwned,
