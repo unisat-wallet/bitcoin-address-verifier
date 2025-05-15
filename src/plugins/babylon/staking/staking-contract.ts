@@ -29,7 +29,6 @@ export function getStakingContract(
   );
   const covenantThreshold: number = params.covenantThreshold;
   const minUnbondingTime: number = params.minUnbondingTime;
-  const magicBytes: Buffer = Buffer.from(params.magicBytes, "hex"); // "bbt4" tag
   const stakingDuration: number = params.stakingDuration;
   const finalityProviders: Buffer[] = params.finalityProviders.map((pk) =>
     Buffer.from(pk, "hex")
@@ -41,15 +40,13 @@ export function getStakingContract(
     covenantPks,
     covenantThreshold,
     stakingDuration,
-    minUnbondingTime,
-    magicBytes
+    minUnbondingTime
   );
 
   const {
     timelockScript,
     unbondingScript,
     slashingScript,
-    dataEmbedScript,
     unbondingTimelockScript,
   } = stakingScriptData.buildScripts();
 
