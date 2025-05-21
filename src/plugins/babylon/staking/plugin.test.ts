@@ -21,7 +21,6 @@ describe("babylon:staking", () => {
       covenantThreshold: 1,
       minUnbondingTime: 101,
       stakingDuration: 144,
-      magicBytes: "62627434",
     };
     expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
@@ -50,7 +49,6 @@ describe("babylon:staking", () => {
       covenantThreshold: 1,
       minUnbondingTime: 101,
       stakingDuration: 144,
-      magicBytes: "62627434",
     };
     expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);

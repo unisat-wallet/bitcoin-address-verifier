@@ -32,7 +32,6 @@ const result = verifyContract("babylon:staking", {
   covenantThreshold: 1,
   minUnbondingTime: 101,
   stakingDuration: 144,
-  magicBytes: "62627434",
 },{
   address: "",
   publicKey: ""

@@ -16,7 +16,6 @@ export function getStakingContract(
     stakerPk: string;
     covenantPks: string[];
     finalityProviders: string[];
-    magicBytes: string;
     covenantThreshold: number;
     minUnbondingTime: number;
     stakingDuration: number;
