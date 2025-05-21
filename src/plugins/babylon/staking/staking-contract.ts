@@ -1,4 +1,4 @@
-import { opcodes, script, payments, networks, initEccLib } from "bitcoinjs-lib";
+import { payments, initEccLib } from "bitcoinjs-lib";
 import { StakingScriptData } from "@babylonlabs-io/btc-staking-ts";
 import { Taptree } from "bitcoinjs-lib/src/types";
 import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
@@ -46,7 +46,6 @@ export function getStakingContract(
     timelockScript,
     unbondingScript,
     slashingScript,
-    unbondingTimelockScript,
   } = stakingScriptData.buildScripts();
 
   // Build input tapleaf script
