@@ -1,5 +1,5 @@
 import { WalletAccount } from "../../../core-sdk/types";
-import plugin from "../../babylon/staking";
+import plugin from "../../babylon/unbonding";
 
 describe("babylon:unbonding", () => {
   it("should generate valid address", () => {
@@ -53,7 +53,7 @@ describe("babylon:unbonding", () => {
     expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
-      "tb1p3f2vlfpausm5xev6sm24hqmj8k9q8nuc5mjrxhkwkeq8ck5epxnse656wz"
+      "tb1ps7cyyqahwz4d9dlpsjqdzzksv0a3c4upqxa3yyeh3f856r4a6y3q4wslwx"
     );
     expect(result.isOwned).toBe(false);
   });
