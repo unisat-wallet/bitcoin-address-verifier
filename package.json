@@ -25,7 +25,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@babylonlabs-io/btc-staking-ts": "^1.0.6"
+    "@babylonlabs-io/btc-staking-ts": "^1.0.9"
   },
   "publishConfig": {
     "access": "public",
