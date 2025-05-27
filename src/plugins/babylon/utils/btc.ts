@@ -1,12 +1,12 @@
 import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 import { initEccLib } from "bitcoinjs-lib";
 
+import { NO_COORD_PK_BYTE_LENGTH } from "../constants/keys";
+
 // Initialize elliptic curve library
 export const initBTCCurve = () => {
   initEccLib(ecc);
 };
-
-import { NO_COORD_PK_BYTE_LENGTH } from "../constants/keys";
 
 /**
  * Get the public key without the coordinate.
