@@ -1,3 +1,5 @@
+import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
+
 import {
   ContractPlugin,
   ContractNetwork,
@@ -5,9 +7,6 @@ import {
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
 import { getUnbondingContract } from "./unbonding-contract";
-
-const toXOnly = (pubKey) =>
-  pubKey.length === 32 ? pubKey : pubKey.slice(1, 33);
 
 export default {
   id: "babylon:unbonding",
