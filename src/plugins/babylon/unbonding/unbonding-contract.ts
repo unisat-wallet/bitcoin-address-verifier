@@ -1,11 +1,14 @@
 import { payments } from "bitcoinjs-lib";
-import { StakingScriptData } from "@babylonlabs-io/btc-staking-ts";
 import { Taptree } from "bitcoinjs-lib/src/types";
 
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
 import { getPublicKeyNoCoord, initBTCCurve } from "../utils/btc";
+import {
+  buildSlashingScript,
+  buildUnbondingTimelockScript
+} from "../utils/scripts";
 
 initBTCCurve();
 
@@ -16,7 +19,6 @@ export function getUnbondingContract(
     finalityProviders: string[];
     covenantThreshold: number;
     unbondingTimeBlocks: number;
-    stakingDuration: number;
   },
   network = ContractNetwork.MAINNET
 ) {
@@ -28,19 +30,19 @@ export function getUnbondingContract(
     Buffer.from(getPublicKeyNoCoord(pk), "hex")
   );
 
-  const { covenantThreshold, unbondingTimeBlocks, stakingDuration } = params;
+  const { covenantThreshold, unbondingTimeBlocks } = params;
 
-  const stakingScriptData = new StakingScriptData(
+  const unbondingTimelockScript = buildUnbondingTimelockScript(
     stakerPk,
-    finalityProviders,
-    covenantPks,
-    covenantThreshold,
-    stakingDuration,
     unbondingTimeBlocks
   );
 
-  const { unbondingTimelockScript, slashingScript } =
-    stakingScriptData.buildScripts();
+  const slashingScript = buildSlashingScript(
+    stakerPk,
+    finalityProviders,
+    covenantPks,
+    covenantThreshold
+  );
 
   const unbondingScriptTree: Taptree = [
     { output: slashingScript },
