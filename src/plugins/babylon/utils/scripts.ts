@@ -18,7 +18,7 @@ export const buildSlashingScript = (
   finalityProviderKeys: Buffer[],
   covenantKeys: Buffer[],
   covenantThreshold: number
-) => {
+): Buffer => {
   return Buffer.concat([
     buildSingleKeyScript(stakerKey, true),
     buildMultiKeyScript(
