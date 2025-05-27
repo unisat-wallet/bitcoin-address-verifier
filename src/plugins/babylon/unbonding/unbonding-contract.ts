@@ -5,7 +5,7 @@ import { Taptree } from "bitcoinjs-lib/src/types";
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
-import { initBTCCurve } from "../utils/btc";
+import { getPublicKeyNoCoord, initBTCCurve } from "../utils/btc";
 
 initBTCCurve();
 
@@ -22,10 +22,10 @@ export function getUnbondingContract(
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");
   const covenantPks: Buffer[] = params.covenantPks.map((pk) =>
-    Buffer.from(pk, "hex")
+    Buffer.from(getPublicKeyNoCoord(pk), "hex")
   );
   const finalityProviders: Buffer[] = params.finalityProviders.map((pk) =>
-    Buffer.from(pk, "hex")
+    Buffer.from(getPublicKeyNoCoord(pk), "hex")
   );
 
   const { covenantThreshold, unbondingTimeBlocks, stakingDuration } = params;
