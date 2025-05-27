@@ -5,14 +5,11 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
-import { initBTCCurve } from "../utils/btc";
 import {
   buildSlashingScript,
   buildUnbondingTimelockScript
 } from "../utils/scripts";
 import { BabylonUnbondingPluginParams } from "../types/types";
-
-initBTCCurve();
 
 export function getUnbondingContract(
   params: BabylonUnbondingPluginParams,
