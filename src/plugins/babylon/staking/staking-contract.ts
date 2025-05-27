@@ -40,26 +40,23 @@ export function getStakingContract(
     minUnbondingTime
   );
 
-  const {
-    timelockScript,
-    unbondingScript,
-    slashingScript,
-  } = stakingScriptData.buildScripts();
+  const { timelockScript, unbondingScript, slashingScript } =
+    stakingScriptData.buildScripts();
 
   // Build input tapleaf script
   const inputScriptTree: Taptree = [
     { output: slashingScript },
-    [{ output: unbondingScript }, { output: timelockScript }],
+    [{ output: unbondingScript }, { output: timelockScript }]
   ];
 
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: inputScriptTree,
-    network: networkToBitcoinNetwork(network),
+    network: networkToBitcoinNetwork(network)
   });
 
   return {
     address: p2tr.address || "",
-    script: p2tr.output.toString("hex"),
+    script: p2tr.output.toString("hex")
   };
 }

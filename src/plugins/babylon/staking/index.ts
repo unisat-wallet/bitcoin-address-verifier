@@ -3,7 +3,7 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 import {
   ContractPlugin,
   ContractNetwork,
-  WalletAccount,
+  WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
 import { getStakingContract } from "./staking-contract";
@@ -34,7 +34,7 @@ export default {
     return {
       isOwned,
       address: result.address,
-      script: result.script,
+      script: result.script
     };
-  },
+  }
 } as ContractPlugin;

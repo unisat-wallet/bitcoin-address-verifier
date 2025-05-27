@@ -40,24 +40,22 @@ export function getUnbondingContract(
     unbondingTimeBlocks
   );
 
-  const {
-    unbondingTimelockScript,
-    slashingScript,
-  } = stakingScriptData.buildScripts();
+  const { unbondingTimelockScript, slashingScript } =
+    stakingScriptData.buildScripts();
 
   const unbondingScriptTree: Taptree = [
     { output: slashingScript },
-    { output: unbondingTimelockScript },
+    { output: unbondingTimelockScript }
   ];
 
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: unbondingScriptTree,
-    network: networkToBitcoinNetwork(network),
+    network: networkToBitcoinNetwork(network)
   });
 
   return {
     address: p2tr.address || "",
-    script: p2tr.output?.toString("hex") || "",
+    script: p2tr.output?.toString("hex") || ""
   };
 }
