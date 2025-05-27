@@ -15,7 +15,7 @@ export function getUnbondingContract(
     covenantPks: string[];
     finalityProviders: string[];
     covenantThreshold: number;
-    minUnbondingTime: number;
+    unbondingTimeBlocks: number;
     stakingDuration: number;
   },
   network = ContractNetwork.MAINNET
@@ -25,7 +25,7 @@ export function getUnbondingContract(
     Buffer.from(pk, "hex")
   );
   const covenantThreshold: number = params.covenantThreshold;
-  const minUnbondingTime: number = params.minUnbondingTime;
+  const unbondingTimeBlocks: number = params.unbondingTimeBlocks;
   const stakingDuration: number = params.stakingDuration;
   const finalityProviders: Buffer[] = params.finalityProviders.map((pk) =>
     Buffer.from(pk, "hex")
@@ -37,7 +37,7 @@ export function getUnbondingContract(
     covenantPks,
     covenantThreshold,
     stakingDuration,
-    minUnbondingTime
+    unbondingTimeBlocks
   );
 
   const {
