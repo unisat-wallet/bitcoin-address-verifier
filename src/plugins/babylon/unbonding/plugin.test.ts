@@ -53,7 +53,7 @@ describe("babylon:unbonding", () => {
     expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
-      "tb1ps7cyyqahwz4d9dlpsjqdzzksv0a3c4upqxa3yyeh3f856r4a6y3q4wslwx"
+      "tb1p0c5g974u2sn8xnc2k485zwf0ju7cyjm9rgjaeskwy45kk35urntqaprtkg"
     );
     expect(result.isOwned).toBe(false);
   });

@@ -1,11 +1,12 @@
 import { payments } from "bitcoinjs-lib";
 import { StakingScriptData } from "@babylonlabs-io/btc-staking-ts";
 import { Taptree } from "bitcoinjs-lib/src/types";
+import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
-import { getPublicKeyNoCoord, initBTCCurve } from "../utils/btc";
+import { initBTCCurve } from "../utils/btc";
 
 initBTCCurve();
 
@@ -22,10 +23,10 @@ export function getStakingContract(
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");
   const covenantPks: Buffer[] = params.covenantPks.map((pk) =>
-    Buffer.from(getPublicKeyNoCoord(pk), "hex")
+    toXOnly(Buffer.from(pk, "hex"))
   );
   const finalityProviders: Buffer[] = params.finalityProviders.map((pk) =>
-    Buffer.from(getPublicKeyNoCoord(pk), "hex")
+    toXOnly(Buffer.from(pk, "hex"))
   );
 
   const { covenantThreshold, minUnbondingTime, stakingDuration } = params;
