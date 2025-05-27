@@ -24,12 +24,11 @@ export function getUnbondingContract(
   const covenantPks: Buffer[] = params.covenantPks.map((pk) =>
     Buffer.from(pk, "hex")
   );
-  const covenantThreshold: number = params.covenantThreshold;
-  const unbondingTimeBlocks: number = params.unbondingTimeBlocks;
-  const stakingDuration: number = params.stakingDuration;
   const finalityProviders: Buffer[] = params.finalityProviders.map((pk) =>
     Buffer.from(pk, "hex")
   );
+
+  const { covenantThreshold, unbondingTimeBlocks, stakingDuration } = params;
 
   const stakingScriptData = new StakingScriptData(
     stakerPk,
