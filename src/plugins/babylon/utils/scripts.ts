@@ -3,6 +3,39 @@ import { opcodes, script } from "bitcoinjs-lib";
 import { NO_COORD_PK_BYTE_LENGTH } from "../constants/keys";
 
 /**
+ * Builds the unbonding timelock script.
+ * Creates the unbonding timelock script in the form:
+ *    <stakerPubKey>
+ *    OP_CHECKSIGVERIFY
+ *    <unbondingTimeBlocks>
+ *    OP_CHECKSEQUENCEVERIFY
+ * @returns {Buffer} The unbonding timelock script.
+ */
+export const buildUnbondingTimelockScript = (
+  stakerKey: Buffer,
+  unbondingTimeLock: number
+): Buffer => {
+  return buildTimelockScript(stakerKey, unbondingTimeLock);
+};
+
+/**
+ * Builds a timelock script.
+ * @param timelock - The timelock value to encode in the script.
+ * @returns {Buffer} containing the compiled timelock script.
+ */
+export const buildTimelockScript = (
+  stakerKey: Buffer,
+  timelock: number
+): Buffer => {
+  return script.compile([
+    stakerKey,
+    opcodes.OP_CHECKSIGVERIFY,
+    script.number.encode(timelock),
+    opcodes.OP_CHECKSEQUENCEVERIFY
+  ]);
+};
+
+/**
  * Builds the slashing script for staking in the form:
  *    buildSingleKeyScript(stakerPk, true) ||
  *    buildMultiKeyScript(finalityProviderPKs, 1, true) ||
