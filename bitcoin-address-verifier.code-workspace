@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../btc-staking-ts"
+	}
+],
+  "settings": {
+    "prettier.semi": true
+  }
+}
