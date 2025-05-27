@@ -4,13 +4,17 @@ export enum ContractNetwork {
   REGTEST = "regtest",
 }
 
-export interface ContractPlugin {
+export interface ContractParams {
+  [key: string]: string | number | string[] | number[];
+}
+
+export interface ContractPlugin<T extends ContractParams = ContractParams> {
   id: string; // Plugin ID
   name: string; // Plugin name
   description: string; // Plugin description
 
   verify: (
-    params: any,
+    params: T, // Contract parameters
     account: WalletAccount
   ) => {
     isOwned: boolean; // Ownership status

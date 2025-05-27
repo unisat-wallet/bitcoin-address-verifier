@@ -7,18 +7,12 @@ import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
 import { initBTCCurve } from "../utils/btc";
+import { BabylonStakingPluginParams } from "../types/types";
 
 initBTCCurve();
 
 export function getStakingContract(
-  params: {
-    stakerPk: string;
-    covenantPks: string[];
-    finalityProviders: string[];
-    covenantThreshold: number;
-    minUnbondingTime: number;
-    stakingDuration: number;
-  },
+  params: BabylonStakingPluginParams,
   network = ContractNetwork.MAINNET
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");

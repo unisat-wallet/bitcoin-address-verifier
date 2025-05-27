@@ -10,17 +10,12 @@ import {
   buildSlashingScript,
   buildUnbondingTimelockScript
 } from "../utils/scripts";
+import { BabylonUnbondingPluginParams } from "../types/types";
 
 initBTCCurve();
 
 export function getUnbondingContract(
-  params: {
-    stakerPk: string;
-    covenantPks: string[];
-    finalityProviders: string[];
-    covenantThreshold: number;
-    unbondingTimeBlocks: number;
-  },
+  params: BabylonUnbondingPluginParams,
   network = ContractNetwork.MAINNET
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");

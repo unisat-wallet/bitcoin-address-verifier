@@ -6,13 +6,14 @@ import {
   WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
+import { BabylonStakingPluginParams } from "../types/types";
 import { getStakingContract } from "./staking-contract";
 
 export default {
   id: "babylon:staking",
   name: "Babylon Staking Contract",
   description: "Babylon Staking Contract",
-  verify(params, account: WalletAccount) {
+  verify(params: BabylonStakingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
       toXOnly(Buffer.from(account.publicKey, "hex")).toString("hex") ===

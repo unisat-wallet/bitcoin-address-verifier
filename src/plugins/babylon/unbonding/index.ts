@@ -6,13 +6,14 @@ import {
   WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
+import { BabylonUnbondingPluginParams } from "../types/types";
 import { getUnbondingContract } from "./unbonding-contract";
 
 export default {
   id: "babylon:unbonding",
   name: "Babylon Unbonding Contract",
   description: "Babylon Unbonding Contract",
-  verify(params, account: WalletAccount) {
+  verify(params: BabylonUnbondingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
       toXOnly(Buffer.from(account.publicKey, "hex")).toString("hex") ===
