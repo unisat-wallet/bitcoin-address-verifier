@@ -1,13 +1,13 @@
-import { payments, initEccLib } from "bitcoinjs-lib";
+import { payments } from "bitcoinjs-lib";
 import { StakingScriptData } from "@babylonlabs-io/btc-staking-ts";
 import { Taptree } from "bitcoinjs-lib/src/types";
-import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubKey";
+import { initBTCCurve } from "../utils/btc";
 
-initEccLib(ecc);
+initBTCCurve();
 
 export function getStakingContract(
   params: {
