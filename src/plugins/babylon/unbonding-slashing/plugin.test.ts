@@ -53,7 +53,7 @@ describe("babylon:staking-slashing", () => {
     expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
-      "tb1p0c5g974u2sn8xnc2k485zwf0ju7cyjm9rgjaeskwy45kk35urntqaprtkg"
+      "tb1p7stvpqcxl0qpkcc92f575qhtd026pslpggpje3e2h3myyg8920esf8rscv"
     );
     expect(result.isOwned).toBe(false);
   });
