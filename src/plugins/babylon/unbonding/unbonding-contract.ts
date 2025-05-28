@@ -4,10 +4,10 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
 import { ContractNetwork } from "../../../core-sdk/types";
 import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
-import { internalPubkey } from "../utils/internalPubKey";
+import { internalPubkey } from "../utils/internalPubkey";
 import {
   buildSlashingScript,
-  buildUnbondingTimelockScript
+  buildUnbondingTimelockScript,
 } from "../utils/scripts";
 import { BabylonUnbondingPluginParams } from "../types/types";
 
@@ -39,17 +39,17 @@ export function getUnbondingContract(
 
   const unbondingScriptTree: Taptree = [
     { output: slashingScript },
-    { output: unbondingTimelockScript }
+    { output: unbondingTimelockScript },
   ];
 
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: unbondingScriptTree,
-    network: networkToBitcoinNetwork(network)
+    network: networkToBitcoinNetwork(network),
   });
 
   return {
     address: p2tr.address || "",
-    script: p2tr.output?.toString("hex") || ""
+    script: p2tr.output?.toString("hex") || "",
   };
 }
