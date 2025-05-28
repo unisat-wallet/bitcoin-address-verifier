@@ -1,7 +1,7 @@
 import { WalletAccount } from "../../../core-sdk/types";
-import plugin from "../../babylon/staking-slashing";
+import plugin from "../../babylon/unbonding-slashing";
 
-describe("babylon:staking-slashing", () => {
+describe("babylon:unbonding-slashing", () => {
   it("should generate valid address", () => {
     const account: WalletAccount = {
       address: "bc1qp2npkhwqk9wzlh3pwf4ultjem5ve9032g3gevy",
