@@ -8,7 +8,7 @@ import {
 } from "../utils/scripts"
 import { BabylonSlashingPluginParams } from "../types/types"
 
-export function getUnbondingSlashingContract(
+export function getSlashingContract(
   params: BabylonSlashingPluginParams,
   network = ContractNetwork.MAINNET
 ) {

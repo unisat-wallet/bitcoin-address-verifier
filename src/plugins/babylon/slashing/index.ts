@@ -7,12 +7,12 @@ import {
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
 import { BabylonSlashingPluginParams } from "../types/types";
-import { getUnbondingSlashingContract } from "./unbonding-slashing-contract";
+import { getSlashingContract } from "./slashing-contract";
 
 export default {
-  id: "babylon:unbonding-slashing",
-  name: "Babylon Unbonding Slashing Contract",
-  description: "Babylon Unbonding Slashing Contract",
+  id: "babylon:slashing",
+  name: "Babylon Slashing Refund",
+  description: "Babylon Slashing Refund",
   verify(params: BabylonSlashingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
@@ -27,7 +27,7 @@ export default {
       throw new Error("Invalid account address");
     }
 
-    const result = getUnbondingSlashingContract(
+    const result = getSlashingContract(
       params,
       network.network as ContractNetwork
     );

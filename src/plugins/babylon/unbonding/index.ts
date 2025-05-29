@@ -11,8 +11,8 @@ import { getUnbondingContract } from "./unbonding-contract";
 
 export default {
   id: "babylon:unbonding",
-  name: "Babylon Unbonding Contract",
-  description: "Babylon Unbonding Contract",
+  name: "Babylon Unbonding",
+  description: "Babylon Unbonding",
   verify(params: BabylonUnbondingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
