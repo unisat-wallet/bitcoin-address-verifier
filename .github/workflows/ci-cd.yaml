@@ -2,10 +2,10 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main]
-    tags: ["v*.*.*"]
+    branches: [master, develop]
+    tags: ["v*.*.*", "v*.*.*-*"]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-and-test:
@@ -32,8 +32,8 @@ jobs:
 
   publish:
     needs: build-and-test
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
       - name: Checkout repository
@@ -51,7 +51,20 @@ jobs:
       - name: Build TypeScript
         run: yarn build
 
+      - name: Extract tag name
+        id: tag
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Determine publish tag
+        id: publish_tag
+        run: |
+          if [[ "$TAG" == *-* ]]; then
+            echo "tag=dev" >> $GITHUB_OUTPUT
+          else
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          fi
+
       - name: Publish to npm
-        run: yarn npm publish --access public
+        run: yarn npm publish --access public --tag ${{ steps.publish_tag.outputs.tag }}
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
