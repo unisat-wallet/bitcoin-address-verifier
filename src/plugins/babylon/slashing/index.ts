@@ -6,14 +6,14 @@ import {
   WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
-import { BabylonUnbondingPluginParams } from "../types/types";
-import { getUnbondingContract } from "./unbonding-contract";
+import { BabylonSlashingPluginParams } from "../types/types";
+import { getSlashingContract } from "./slashing-contract";
 
 export default {
-  id: "babylon:unbonding",
-  name: "Babylon Unbonding",
-  description: "Babylon Unbonding",
-  verify(params: BabylonUnbondingPluginParams, account: WalletAccount) {
+  id: "babylon:slashing",
+  name: "Babylon Slashing Refund",
+  description: "Babylon Slashing Refund",
+  verify(params: BabylonSlashingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
       toXOnly(Buffer.from(account.publicKey, "hex")).toString("hex") ===
@@ -27,7 +27,7 @@ export default {
       throw new Error("Invalid account address");
     }
 
-    const result = getUnbondingContract(
+    const result = getSlashingContract(
       params,
       network.network as ContractNetwork
     );

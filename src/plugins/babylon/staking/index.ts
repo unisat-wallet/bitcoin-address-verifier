@@ -11,8 +11,8 @@ import { getStakingContract } from "./staking-contract";
 
 export default {
   id: "babylon:staking",
-  name: "Babylon Staking Contract",
-  description: "Babylon Staking Contract",
+  name: "Babylon Staking",
+  description: "Babylon Staking",
   verify(params: BabylonStakingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
