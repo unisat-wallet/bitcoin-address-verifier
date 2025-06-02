@@ -1,18 +1,7 @@
-import { ContractNetwork } from "./types";
 import * as bitcoin from "bitcoinjs-lib";
 
-export function networkToBitcoinNetwork(network: ContractNetwork) {
-  switch (network) {
-    case ContractNetwork.MAINNET:
-      return bitcoin.networks.bitcoin;
-    case ContractNetwork.TESTNET:
-      return bitcoin.networks.testnet;
-    case ContractNetwork.REGTEST:
-      return bitcoin.networks.regtest;
-    default:
-      throw new Error("Invalid network");
-  }
-}
+// Bitcoin network type, a type alias for the bitcoin.Network type
+export type BtcNetwork = bitcoin.Network;
 
 const NETWORKS = {
   mainnet: bitcoin.networks.bitcoin,
@@ -20,17 +9,16 @@ const NETWORKS = {
   regtest: bitcoin.networks.regtest,
 };
 
-export function getAddressNetwork(address: string): {
-  network: string | null;
-  valid: boolean;
-} {
-  for (const [name, network] of Object.entries(NETWORKS)) {
+export function getAddressNetwork(address: string): BtcNetwork {
+  for (const [_, network] of Object.entries(NETWORKS)) {
     try {
       bitcoin.address.toOutputScript(address, network);
-      return { network: name, valid: true };
-    } catch (_) {
+      return network;
+    } catch {
       continue;
     }
   }
-  return { network: null, valid: false };
+  throw new Error(
+    "Invalid address: No compatible network found for the provided address"
+  );
 }

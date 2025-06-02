@@ -2,7 +2,7 @@ import { WalletAccount } from "../../../core-sdk/types";
 import plugin from "../../babylon/staking";
 
 describe("babylon:staking", () => {
-  it("should generate valid address", () => {
+  it("should generate valid mainnet tapscript address", () => {
     const account: WalletAccount = {
       address: "bc1qp2npkhwqk9wzlh3pwf4ultjem5ve9032g3gevy",
       publicKey:
@@ -30,7 +30,7 @@ describe("babylon:staking", () => {
     expect(result.isOwned).toBe(true);
   });
 
-  it.only("should generate testnet address", () => {
+  it("should generate testnet tapscript address", () => {
     const account: WalletAccount = {
       address: "tb1qftyphvne93ala5wlzhf9p2tmfdqs3x5x6dpyhg",
       publicKey:
@@ -56,9 +56,5 @@ describe("babylon:staking", () => {
       "tb1p3f2vlfpausm5xev6sm24hqmj8k9q8nuc5mjrxhkwkeq8ck5epxnse656wz"
     );
     expect(result.isOwned).toBe(false);
-  });
-
-  it("should throw with invalid params", () => {
-    expect(() => plugin.verify({}, {} as any)).toThrow();
   });
 });

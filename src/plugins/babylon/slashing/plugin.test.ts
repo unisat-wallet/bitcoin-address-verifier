@@ -2,7 +2,7 @@ import { WalletAccount } from "../../../core-sdk/types";
 import plugin from "../../babylon/slashing";
 
 describe("babylon:slashing", () => {
-  it("should generate valid address", () => {
+  it("should generate valid mainnet tapscript address", () => {
     const account: WalletAccount = {
       address: "bc1qp2npkhwqk9wzlh3pwf4ultjem5ve9032g3gevy",
       publicKey:
@@ -12,25 +12,16 @@ describe("babylon:slashing", () => {
     const params = {
       stakerPk:
         "b3e9e3140da9d4a148b1471d9b3d4b1c1ff9fb69f421e19a9443365b2a647bf2",
-      covenantPks: [
-        "50000074c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0"
-      ],
-      finalityProviders: [
-        "50000074c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0"
-      ],
-      covenantThreshold: 1,
-      minUnbondingTime: 101,
-      stakingDuration: 144
+      unbondingTimeBlocks: 144
     };
-    expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
-      "bc1p3f2vlfpausm5xev6sm24hqmj8k9q8nuc5mjrxhkwkeq8ck5epxnswjz45d"
+      "bc1p9dhnp4p4s2ygpyz542zq0e5ch5lx8fat5efr52cszdcyn69z2cpqqqzf92"
     );
     expect(result.isOwned).toBe(true);
   });
 
-  it.only("should generate testnet address", () => {
+  it("should generate testnet tapscript address", () => {
     const account: WalletAccount = {
       address: "tb1qftyphvne93ala5wlzhf9p2tmfdqs3x5x6dpyhg",
       publicKey:
@@ -40,25 +31,12 @@ describe("babylon:slashing", () => {
     const params = {
       stakerPk:
         "b3e9e3140da9d4a148b1471d9b3d4b1c1ff9fb69f421e19a9443365b2a647bf2",
-      covenantPks: [
-        "50000074c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0"
-      ],
-      finalityProviders: [
-        "50000074c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0"
-      ],
-      covenantThreshold: 1,
-      minUnbondingTime: 101,
-      stakingDuration: 144
+      unbondingTimeBlocks: 144
     };
-    expect(() => plugin.verify(params, account)).not.toThrow();
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
-      "tb1p7stvpqcxl0qpkcc92f575qhtd026pslpggpje3e2h3myyg8920esf8rscv"
+      "tb1p9dhnp4p4s2ygpyz542zq0e5ch5lx8fat5efr52cszdcyn69z2cpqhg5xl9"
     );
     expect(result.isOwned).toBe(false);
-  });
-
-  it("should throw with invalid params", () => {
-    expect(() => plugin.verify({}, {} as any)).toThrow();
   });
 });

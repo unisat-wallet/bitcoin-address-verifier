@@ -2,18 +2,16 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
 import {
   ContractPlugin,
-  ContractNetwork,
-  WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
-import { BabylonStakingPluginParams } from "../types/types";
+import { BABYLON_PLUGINS, BabylonStakingPluginParams } from "../types/types";
 import { getStakingContract } from "./staking-contract";
 
-export default {
-  id: "babylon:staking",
-  name: "Babylon Staking",
-  description: "Babylon Staking",
-  verify(params: BabylonStakingPluginParams, account: WalletAccount) {
+const stakingPlugin: ContractPlugin<BabylonStakingPluginParams> = {
+  id: BABYLON_PLUGINS.STAKING.id,
+  name: BABYLON_PLUGINS.STAKING.name,
+  description: BABYLON_PLUGINS.STAKING.description,
+  verify(params, account) {
     let isOwned = false;
     if (
       toXOnly(Buffer.from(account.publicKey, "hex")).toString("hex") ===
@@ -23,13 +21,10 @@ export default {
     }
 
     const network = getAddressNetwork(account.address);
-    if (!network.valid) {
-      throw new Error("Invalid account address");
-    }
-
+    
     const result = getStakingContract(
       params,
-      network.network as ContractNetwork
+      network
     );
 
     return {
@@ -38,4 +33,6 @@ export default {
       script: result.script
     };
   }
-} as ContractPlugin;
+};
+
+export default stakingPlugin;

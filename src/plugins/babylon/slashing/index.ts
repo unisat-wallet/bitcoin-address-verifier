@@ -2,17 +2,16 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
 import {
   ContractPlugin,
-  ContractNetwork,
   WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
-import { BabylonSlashingPluginParams } from "../types/types";
+import { BABYLON_PLUGINS, BabylonSlashingPluginParams } from "../types/types";
 import { getSlashingContract } from "./slashing-contract";
 
-export default {
-  id: "babylon:slashing",
-  name: "Babylon Slashing Refund",
-  description: "Babylon Slashing Refund",
+const slashingPlugin: ContractPlugin<BabylonSlashingPluginParams> = {
+  id: BABYLON_PLUGINS.SLASHING.id,
+  name: BABYLON_PLUGINS.SLASHING.name,
+  description: BABYLON_PLUGINS.SLASHING.description,
   verify(params: BabylonSlashingPluginParams, account: WalletAccount) {
     let isOwned = false;
     if (
@@ -23,13 +22,10 @@ export default {
     }
 
     const network = getAddressNetwork(account.address);
-    if (!network.valid) {
-      throw new Error("Invalid account address");
-    }
-
+    
     const result = getSlashingContract(
       params,
-      network.network as ContractNetwork
+      network
     );
 
     return {
@@ -38,4 +34,6 @@ export default {
       script: result.script
     };
   }
-} as ContractPlugin;
+}
+
+export default slashingPlugin;

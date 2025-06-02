@@ -1,7 +1,6 @@
 import { payments } from "bitcoinjs-lib"
 
-import { ContractNetwork } from "../../../core-sdk/types"
-import { networkToBitcoinNetwork } from "../../../core-sdk/utils"
+import { BtcNetwork } from "../../../core-sdk/utils"
 import { internalPubkey } from "../utils/internalPubkey"
 import {
   buildUnbondingTimelockScript
@@ -10,7 +9,7 @@ import { BabylonSlashingPluginParams } from "../types/types"
 
 export function getSlashingContract(
   params: BabylonSlashingPluginParams,
-  network = ContractNetwork.MAINNET
+  network: BtcNetwork
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex")
 
@@ -24,7 +23,7 @@ export function getSlashingContract(
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: { output: unbondingTimelockScript },
-    network: networkToBitcoinNetwork(network)
+    network: network
   })
 
   return {

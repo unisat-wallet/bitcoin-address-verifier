@@ -1,5 +1,26 @@
 import { ContractParams } from "../../../core-sdk/types"
 
+export const BABYLON_PLUGINS = {
+  STAKING: {
+    id: "babylon:staking",
+    name: "Babylon Staking",
+    description: "Babylon Staking",
+    params: {} as BabylonStakingPluginParams
+  },
+  UNBONDING: {
+    id: "babylon:unbonding",
+    name: "Babylon Unbonding",
+    description: "Babylon Unbonding",
+    params: {} as BabylonUnbondingPluginParams
+  },
+  SLASHING: {
+    id: "babylon:slashing",
+    name: "Babylon Slashing Refund",
+    description: "Babylon Slashing Refund",
+    params: {} as BabylonSlashingPluginParams
+  }
+} as const;
+
 /**
  * Parameters for the Babylon Staking Plugin.
  */

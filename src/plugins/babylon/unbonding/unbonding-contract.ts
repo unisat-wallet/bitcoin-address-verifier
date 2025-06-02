@@ -2,8 +2,7 @@ import { payments } from "bitcoinjs-lib";
 import { Taptree } from "bitcoinjs-lib/src/types";
 import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
-import { ContractNetwork } from "../../../core-sdk/types";
-import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
+import { BtcNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubkey";
 import {
   buildSlashingScript,
@@ -13,7 +12,7 @@ import { BabylonUnbondingPluginParams } from "../types/types";
 
 export function getUnbondingContract(
   params: BabylonUnbondingPluginParams,
-  network = ContractNetwork.MAINNET
+  network: BtcNetwork
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");
   const covenantPks: Buffer[] = params.covenantPks.map((pk) =>
@@ -45,7 +44,7 @@ export function getUnbondingContract(
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: unbondingScriptTree,
-    network: networkToBitcoinNetwork(network),
+    network: network
   });
 
   return {

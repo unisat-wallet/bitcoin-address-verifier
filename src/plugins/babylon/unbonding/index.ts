@@ -2,18 +2,16 @@ import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
 import {
   ContractPlugin,
-  ContractNetwork,
-  WalletAccount
 } from "../../../core-sdk/types";
 import { getAddressNetwork } from "../../../core-sdk/utils";
-import { BabylonUnbondingPluginParams } from "../types/types";
+import { BABYLON_PLUGINS, BabylonUnbondingPluginParams } from "../types/types";
 import { getUnbondingContract } from "./unbonding-contract";
 
-export default {
-  id: "babylon:unbonding",
-  name: "Babylon Unbonding",
-  description: "Babylon Unbonding",
-  verify(params: BabylonUnbondingPluginParams, account: WalletAccount) {
+const unbondingPlugin: ContractPlugin<BabylonUnbondingPluginParams> = {
+  id: BABYLON_PLUGINS.UNBONDING.id,
+  name: BABYLON_PLUGINS.UNBONDING.name,
+  description: BABYLON_PLUGINS.UNBONDING.description,
+  verify(params, account) {
     let isOwned = false;
     if (
       toXOnly(Buffer.from(account.publicKey, "hex")).toString("hex") ===
@@ -23,13 +21,10 @@ export default {
     }
 
     const network = getAddressNetwork(account.address);
-    if (!network.valid) {
-      throw new Error("Invalid account address");
-    }
 
     const result = getUnbondingContract(
       params,
-      network.network as ContractNetwork
+      network
     );
 
     return {
@@ -38,4 +33,6 @@ export default {
       script: result.script
     };
   }
-} as ContractPlugin;
+};
+
+export default unbondingPlugin;

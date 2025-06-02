@@ -3,14 +3,13 @@ import { StakingScriptData } from "@babylonlabs-io/btc-staking-ts";
 import { Taptree } from "bitcoinjs-lib/src/types";
 import { toXOnly } from "bitcoinjs-lib/src/psbt/bip371";
 
-import { ContractNetwork } from "../../../core-sdk/types";
-import { networkToBitcoinNetwork } from "../../../core-sdk/utils";
+import { BtcNetwork } from "../../../core-sdk/utils";
 import { internalPubkey } from "../utils/internalPubkey";
 import { BabylonStakingPluginParams } from "../types/types";
 
 export function getStakingContract(
   params: BabylonStakingPluginParams,
-  network = ContractNetwork.MAINNET
+  network: BtcNetwork
 ) {
   const stakerPk = Buffer.from(params.stakerPk, "hex");
   const covenantPks: Buffer[] = params.covenantPks.map((pk) =>
@@ -43,7 +42,7 @@ export function getStakingContract(
   const p2tr = payments.p2tr({
     internalPubkey,
     scriptTree: inputScriptTree,
-    network: networkToBitcoinNetwork(network),
+    network: network
   });
 
   return {
