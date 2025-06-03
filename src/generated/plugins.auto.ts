@@ -1,4 +1,4 @@
-// Auto-generated at 2025-05-31T01:30:02.610Z
+// Auto-generated at 2025-06-03T07:05:34.891Z
 // DO NOT EDIT DIRECTLY
 
 import BabylonSlashing from '../plugins/babylon/slashing';
