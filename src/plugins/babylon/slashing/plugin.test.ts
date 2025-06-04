@@ -12,7 +12,8 @@ describe("babylon:slashing", () => {
     const params = {
       stakerPk:
         "b3e9e3140da9d4a148b1471d9b3d4b1c1ff9fb69f421e19a9443365b2a647bf2",
-      unbondingTimeBlocks: 144
+      unbondingTimeBlocks: 144,
+      slashingFeeSat: 10000
     };
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
@@ -31,7 +32,8 @@ describe("babylon:slashing", () => {
     const params = {
       stakerPk:
         "b3e9e3140da9d4a148b1471d9b3d4b1c1ff9fb69f421e19a9443365b2a647bf2",
-      unbondingTimeBlocks: 144
+      unbondingTimeBlocks: 144,
+      slashingFeeSat: 10000
     };
     const result = plugin.verify(params, account);
     expect(result.address).toBe(

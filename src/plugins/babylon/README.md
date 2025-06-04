@@ -33,6 +33,12 @@ export const BABYLON_PLUGINS = {
     name: "Babylon Slashing Refund",
     description: "Babylon Slashing Refund",
     params: {} as BabylonSlashingPluginParams
+  },
+  SLASHING_BURN: {
+    id: "babylon:slashing-burn",
+    name: "Babylon Slashing Burn",
+    description: "Babylon Slashing Burn",
+    params: {} as BabylonSlashingBurnPluginParams
   }
 } as const;
 ```
@@ -73,6 +79,13 @@ interface BabylonUnbondingPluginParams extends ContractParams {
 interface BabylonSlashingPluginParams extends ContractParams {
   stakerPk: string
   unbondingTimeBlocks: number
+}
+```
+
+#### 4️⃣ BabylonSlashingBurnPluginParams
+```ts
+interface BabylonSlashingBurnPluginParams extends ContractParams {
+  slashingPkScriptHex: string
 }
 ```
 

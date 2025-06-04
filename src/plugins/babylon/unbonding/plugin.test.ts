@@ -20,6 +20,7 @@ describe("babylon:unbonding", () => {
       ],
       covenantThreshold: 1,
       unbondingTimeBlocks: 101,
+      unbondingFeeSat: 10000
     };
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
@@ -45,7 +46,8 @@ describe("babylon:unbonding", () => {
         "50000074c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0"
       ],
       covenantThreshold: 1,
-      unbondingTimeBlocks: 144
+      unbondingTimeBlocks: 144,
+      unbondingFeeSat: 10000
     };
     const result = plugin.verify(params, account);
     expect(result.address).toBe(
